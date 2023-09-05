@@ -1,0 +1,22 @@
+import os
+import discord
+
+# Create a bot instance with a prefix for commands
+bot = discord.Client(intents=discord.Intents.all())
+
+# Define a command
+@bot.event
+async def on_ready():
+    #Prints bots display name and id in console
+    print(f'Logged in as {bot.user.name} ({bot.user.id})')
+
+@bot.event
+async def on_message(message):
+    if message.author == bot.user:
+        return
+    #test - if !hello bot replys with hello (works in private messaging as well)
+    if message.content.startswith('!hello'):
+        await message.channel.send('Hello!')
+#shhh -  for token menes
+my_secret = os.environ['Secret_Memes']
+bot.run(my_secret)
